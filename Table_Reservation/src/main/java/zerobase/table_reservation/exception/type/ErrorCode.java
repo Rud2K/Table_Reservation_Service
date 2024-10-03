@@ -22,7 +22,7 @@ public enum ErrorCode {
 	// 매장 정보 없음 오류
 	STORE_NOT_FOUND("STORE_NOT_FOUND", "매장 정보를 찾을 수 없습니다.");
 
-	private final String CODE; // 오류 코드
-	private final String MESSAGE; // 오류 메세지
+	private final String CODE;		// 오류 코드 (각 사용자에 대한 식별자)
+	private final String MESSAGE;	// 오류 메세지 (사용자에게 표시될 메세지)
 
 }
