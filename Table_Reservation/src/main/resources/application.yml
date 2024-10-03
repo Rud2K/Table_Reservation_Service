@@ -1,0 +1,21 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: Table-Reservation-Service
+    
+  datasource:
+    url: jdbc:mariadb://localhost:3306/table_reservation
+    username: root
+    password: 1111
+    driver-class-name: org.mariadb.jdbc.Driver
+    
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    
+  jwt:
+    secret: U3RvcmUtVGFibGUtUmVzZXJ2YXRpb24tU2VydmljZS1FeGVjdXRpdmUtUHJvamVjdA==
+    expiration-time: 3600000 # 1 hour
