@@ -2,17 +2,20 @@ package zerobase.table_reservation.persist.entity;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -43,6 +46,10 @@ public class UserEntity implements UserDetails {
 	// 사용자 역할 (ROLE_USER 또는 ROLE_PARTNER)
 	@Enumerated(EnumType.STRING)
 	private Role role;
+	
+	// 사용자가 소유한 매장 정보 리스트
+	@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+	private List<StoreEntity> ownedStores;
 	
 	/**
 	 * 사용자의 권한을 반환하는 메소드

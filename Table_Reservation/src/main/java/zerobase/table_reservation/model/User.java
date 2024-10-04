@@ -1,5 +1,7 @@
 package zerobase.table_reservation.model;
 
+import java.util.List;
+
 import lombok.Data;
 
 public class User {
@@ -12,6 +14,7 @@ public class User {
 		private String username;	// 사용자 이름
 		private String password;	// 비밀번호
 		private String role;		// 사용자 역할 (ROLE_USER 또는 ROLE_PARTNER)
+		private List<Store> stores;	// 사용자가 소유한 매장 정보 리스트
 	}
 	
 	/**

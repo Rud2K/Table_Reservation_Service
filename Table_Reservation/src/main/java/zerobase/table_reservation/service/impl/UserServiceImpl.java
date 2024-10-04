@@ -1,5 +1,7 @@
 package zerobase.table_reservation.service.impl;
 
+import java.util.ArrayList;
+
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -40,6 +42,7 @@ public class UserServiceImpl implements UserService {
 				.username(request.getUsername())
 				.password(this.passwordEncoder.encode(request.getPassword()))
 				.role(Role.valueOf(request.getRole()))
+				.ownedStores(new ArrayList<>())
 				.build();
 		
 		// 사용자 정보 저장
