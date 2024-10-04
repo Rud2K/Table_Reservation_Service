@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import zerobase.table_reservation.exception.InvalidCredentialsException;
+import zerobase.table_reservation.exception.UserException;
 import zerobase.table_reservation.exception.type.ErrorCode;
 import zerobase.table_reservation.model.User;
 import zerobase.table_reservation.model.constant.Role;
@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
 	public UserEntity signUp(User.SignUp request) {
 		// 사용자 이름이 이미 존재하는지 확인
 		if (this.userRepository.existsByUsername(request.getUsername())) {
-			throw new InvalidCredentialsException(ErrorCode.USER_ALREADY_EXISTS);
+			throw new UserException(ErrorCode.USER_ALREADY_EXISTS);
 		}
 		
 		// 사용자 정보 생성
@@ -53,11 +53,11 @@ public class UserServiceImpl implements UserService {
 	public String signIn(User.SignIn request) {
 		// 사용자 이름으로 사용자 찾기
 		UserEntity user = this.userRepository.findByUsername(request.getUsername())
-				.orElseThrow(() -> new InvalidCredentialsException(ErrorCode.USER_NOT_FOUND));
+				.orElseThrow(() -> new UserException(ErrorCode.USER_NOT_FOUND));
 		
 		// 비밀번호 확인
 		if (!this.passwordEncoder.matches(request.getPassword(), user.getPassword())) {
-			throw new InvalidCredentialsException(ErrorCode.INVALID_CREDENTIALS);
+			throw new UserException(ErrorCode.INVALID_CREDENTIALS);
 		}
 		
 		try {
@@ -68,7 +68,7 @@ public class UserServiceImpl implements UserService {
 			// 성공 시 JWT 생성
 			return this.tokenProvider.createToken(authentication.getName(), authentication.getAuthorities());
 		} catch (AuthenticationException e) {
-			throw new InvalidCredentialsException(ErrorCode.INVALID_CREDENTIALS);
+			throw new UserException(ErrorCode.INVALID_CREDENTIALS);
 		}
 	}
 	
