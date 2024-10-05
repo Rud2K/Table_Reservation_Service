@@ -64,4 +64,30 @@ public class UserEntity implements UserDetails {
 		return Collections.singletonList(new SimpleGrantedAuthority(this.role.name()));
 	}
 	
+	/**
+	 * 매장을 사용자의 소유 매장 목록에 추가하는 메소드
+	 * 
+	 * @param store 추가할 StoreEntity 객체
+	 * 
+	 * 사용자가 매장을 소유하도록 매장을 추가하고,
+	 * 매장의 소유자 필드를 해당 사용자로 설정합니다.
+	 */
+	public void addStore(StoreEntity store) {
+		this.ownedStores.add(store);
+		store.setOwner(this);
+	}
+	
+	/**
+	 * 매장을 사용자의 소유 매장 목록에서 제거하는 메소드
+	 * 
+	 * @param store 제거할 StoreEntity 객체
+	 * 
+	 * 사용자의 소유 매장 목록에서 매장을 제거하고,
+	 * 매장의 소유자 필드를 null로 설정하여 매장과의 연결을 해제합니다.
+	 */
+	public void removeStore(StoreEntity store) {
+		this.ownedStores.remove(store);
+		store.setOwner(null);
+	}
+	
 }
