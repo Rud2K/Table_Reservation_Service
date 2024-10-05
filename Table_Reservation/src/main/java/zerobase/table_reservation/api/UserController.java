@@ -20,6 +20,7 @@ public class UserController {
 	
 	/**
 	 * 회원가입 요청을 처리하는 메소드
+	 * POST /auth/signup
 	 * 
 	 * @param request 회원가입 요청 정보 (User.SignUp)
 	 * @return 생성된 UserEntity 객체를 포함한 ResponseEntity
@@ -35,6 +36,7 @@ public class UserController {
 	
 	/**
 	 * 로그인 요청을 처리하는 메소드
+	 * POST /auth/signin
 	 * 
 	 * @param request 로그인 요청 정보 (User.SignIn)
 	 * @return 로그인 성공 시 JWT 정보를 포함한 ResponseEntity
