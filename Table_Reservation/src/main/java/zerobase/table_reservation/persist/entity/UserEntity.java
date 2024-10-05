@@ -1,5 +1,6 @@
 package zerobase.table_reservation.persist.entity;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -73,6 +74,9 @@ public class UserEntity implements UserDetails {
 	 * 매장의 소유자 필드를 해당 사용자로 설정합니다.
 	 */
 	public void addStore(StoreEntity store) {
+		if (this.ownedStores == null) {
+			this.ownedStores = new ArrayList<>();
+		}
 		this.ownedStores.add(store);
 		store.setOwner(this);
 	}
