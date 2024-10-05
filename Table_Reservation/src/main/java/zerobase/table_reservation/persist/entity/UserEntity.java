@@ -49,7 +49,7 @@ public class UserEntity implements UserDetails {
 	private Role role;
 	
 	// 사용자가 소유한 매장 정보 리스트
-	@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<StoreEntity> ownedStores;
 	
 	/**
