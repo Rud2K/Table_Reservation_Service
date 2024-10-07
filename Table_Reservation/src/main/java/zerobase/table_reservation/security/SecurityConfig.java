@@ -2,6 +2,7 @@ package zerobase.table_reservation.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -35,8 +36,10 @@ public class SecurityConfig {
 			.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 			.addFilterBefore(new JwtAuthenticationFilter(this.tokenProvider, this.customUserDetailsService),
 					UsernamePasswordAuthenticationFilter.class)
-			.authorizeHttpRequests(
-					auth -> auth.requestMatchers("/auth/**").permitAll().anyRequest().authenticated())
+			.authorizeHttpRequests(auth -> auth
+					.requestMatchers("/auth/**").permitAll()
+					.requestMatchers(HttpMethod.GET, "/store/**").permitAll()
+					.anyRequest().authenticated())
 			.headers(
 					headers -> headers.contentSecurityPolicy(csp -> csp.policyDirectives("frame-ancestors 'self'")))
 			.formLogin(form -> form.disable()).httpBasic(basic -> basic.disable());
