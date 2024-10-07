@@ -43,6 +43,7 @@ public class UserServiceImpl implements UserService {
 				.password(this.passwordEncoder.encode(request.getPassword()))
 				.role(Role.valueOf(request.getRole()))
 				.ownedStores(new ArrayList<>())
+				.reservations(new ArrayList<>())
 				.build();
 		
 		// 사용자 정보 저장
