@@ -5,7 +5,7 @@ import lombok.Getter;
 import zerobase.table_reservation.exception.type.ErrorCode;
 
 @Getter
-public class UserException extends RuntimeException {
+public class TableReservationException extends RuntimeException {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -20,7 +20,7 @@ public class UserException extends RuntimeException {
 	 * 주어진 오류 코드에 맞는 메세지가 상위 클래스인 RuntimeException에 전달됩니다.
 	 */
 	@Builder
-	public UserException(ErrorCode errorCode) {
+	public TableReservationException(ErrorCode errorCode) {
 		super(errorCode.getMESSAGE());
 		this.errorCode = errorCode;
 	}

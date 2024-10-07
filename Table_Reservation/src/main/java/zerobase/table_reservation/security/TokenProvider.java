@@ -18,7 +18,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
-import zerobase.table_reservation.exception.InvalidCredentialsException;
+import zerobase.table_reservation.exception.TableReservationException;
 import zerobase.table_reservation.exception.type.ErrorCode;
 
 @Component
@@ -82,7 +82,7 @@ public class TokenProvider {
 			
 			return token;
 		} catch (Exception e) {
-			throw new InvalidCredentialsException(ErrorCode.TOKEN_ISSUANCE_FAILD);
+			throw new TableReservationException(ErrorCode.TOKEN_ISSUANCE_FAILD);
 		}
 	}
 	
@@ -104,7 +104,7 @@ public class TokenProvider {
 					.getBody()
 					.getSubject(); // 클레임에서 사용자 이름 반환
 		} catch (JwtException e) {
-			throw new InvalidCredentialsException(ErrorCode.INVALID_CREDENTIALS);
+			throw new TableReservationException(ErrorCode.INVALID_CREDENTIALS);
 		}
 	}
 	
@@ -121,13 +121,13 @@ public class TokenProvider {
 			Jwts.parserBuilder().setSigningKey(this.key).build().parseClaimsJws(token);
 			return true;
 		} catch (SecurityException | MalformedJwtException e) {
-			throw new InvalidCredentialsException(ErrorCode.INVALID_CREDENTIALS);	// 잘못된 서명
+			throw new TableReservationException(ErrorCode.INVALID_CREDENTIALS);	// 잘못된 서명
 		} catch (ExpiredJwtException e) {
-			throw new InvalidCredentialsException(ErrorCode.INVALID_CREDENTIALS);	// 만료된 토큰
+			throw new TableReservationException(ErrorCode.INVALID_CREDENTIALS);	// 만료된 토큰
 		} catch (UnsupportedJwtException e) {
-			throw new InvalidCredentialsException(ErrorCode.INVALID_CREDENTIALS);	// 지원되지 않는 토큰
+			throw new TableReservationException(ErrorCode.INVALID_CREDENTIALS);	// 지원되지 않는 토큰
 		} catch (IllegalArgumentException e) {
-			throw new InvalidCredentialsException(ErrorCode.INVALID_CREDENTIALS);	// 잘못된 토큰
+			throw new TableReservationException(ErrorCode.INVALID_CREDENTIALS);	// 잘못된 토큰
 		}
 	}
 	
