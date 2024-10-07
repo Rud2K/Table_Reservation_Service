@@ -35,8 +35,9 @@ public class StoreServiceImpl implements StoreService {
 		// 해당 예약의 정보를 리스트로 변환
 		List<Reservation.Response> reservations = storeEntity.getReservations().stream()
 				.map(reservation -> Reservation.Response.builder()
-						.username(reservation.getUser().getUsername())
-						.storeName(storeEntity.getName())
+						.userId(reservation.getUser().getId())
+						.storeId(reservation.getStore().getId())
+						.storeName(reservation.getStore().getName())
 						.reservationTime(reservation.getReservationTime())
 						.status(reservation.getStatus().name())
 						.build())
@@ -65,8 +66,9 @@ public class StoreServiceImpl implements StoreService {
 			// 매장의 예약 정보를 변환
 			for (ReservationEntity reservation : storeEntity.getReservations()) {
 				reservationList.add(Reservation.Response.builder()
-						.username(reservation.getUser().getUsername())
-						.storeName(storeEntity.getName())
+						.userId(reservation.getUser().getId())
+						.storeId(reservation.getStore().getId())
+						.storeName(reservation.getStore().getName())
 						.reservationTime(reservation.getReservationTime())
 						.status(reservation.getStatus().toString())
 						.build());
