@@ -24,10 +24,10 @@ import zerobase.table_reservation.service.UserService;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 	
-	private final UserRepository userRepository; // 사용자 정보를 저장하는 리포지토리
-	private final PasswordEncoder passwordEncoder; // 비밀번호 암호화를 위한 인코더
-	private final AuthenticationManager authenticationManager; // 인증 매니저
-	private final TokenProvider tokenProvider; // JWT 생성을 위한 프로바이더
+	private final UserRepository userRepository;
+	private final PasswordEncoder passwordEncoder;
+	private final AuthenticationManager authenticationManager;
+	private final TokenProvider tokenProvider;
 	
 	@Transactional
 	@Override
