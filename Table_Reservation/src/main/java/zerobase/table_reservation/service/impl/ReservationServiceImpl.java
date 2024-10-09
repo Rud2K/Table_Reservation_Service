@@ -76,6 +76,7 @@ public class ReservationServiceImpl implements ReservationService {
 	
 	@Override
 	public Reservation.Response updateReservationStatus(Long reservationId, String status) {
+		// 해당 메소드에서 예약 상태를 취소 상태로 업데이트할 수 없음
 		if ("CANCELED".equalsIgnoreCase(status)) {
 			throw new TableReservationException(ErrorCode.INVALID_ACCESS);
 		}
@@ -109,6 +110,7 @@ public class ReservationServiceImpl implements ReservationService {
 		ReservationEntity reservationEntity = this.reservationRepository.findById(reservationId)
 				.orElseThrow(() -> new TableReservationException(ErrorCode.RESERVATION_NOT_FOUND));
 		
+		// 예약 상태를 취소로 변경하고, 취소 시간을 현재 시간으로 설정
 		reservationEntity.setStatus(ReservationStatus.CANCELED);
 		reservationEntity.setCancellationTime(LocalDateTime.now());
 		
@@ -141,6 +143,7 @@ public class ReservationServiceImpl implements ReservationService {
 	
 	@Override
 	public List<Reservation.Response> getReservationsForStore(Long storeId, String date) {
+		// 주어진 날짜 형식이 유효한지 검사
 		LocalDate localDate;
 		try {
 			localDate = LocalDate.parse(date, DateTimeFormatter.BASIC_ISO_DATE);
@@ -148,6 +151,7 @@ public class ReservationServiceImpl implements ReservationService {
 			throw new TableReservationException(ErrorCode.INVALID_DATE_FORMAT);
 		}
 		
+		// 해당 날짜의 시작과 끝 시간을 설정
 		LocalDateTime startOfDay = localDate.atStartOfDay();
 		LocalDateTime endOfDay = localDate.atTime(LocalTime.MAX);
 		
