@@ -21,34 +21,35 @@ import zerobase.table_reservation.service.CustomUserDetailsService;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-	private final TokenProvider tokenProvider;
-	private final CustomUserDetailsService customUserDetailsService;
+  private final TokenProvider tokenProvider;
+  private final CustomUserDetailsService customUserDetailsService;
 
-	@Bean
-	PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+  @Bean
+  PasswordEncoder passwordEncoder() {
+    return new BCryptPasswordEncoder();
+  }
 
-	@Bean
-	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		http
-			.csrf(csrf -> csrf.disable())
-			.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-			.addFilterBefore(new JwtAuthenticationFilter(this.tokenProvider, this.customUserDetailsService),
-					UsernamePasswordAuthenticationFilter.class)
-			.authorizeHttpRequests(auth -> auth
-					.requestMatchers("/auth/**").permitAll()
-					.requestMatchers(HttpMethod.GET, "/store/**").permitAll()
-					.anyRequest().authenticated())
-			.headers(
-					headers -> headers.contentSecurityPolicy(csp -> csp.policyDirectives("frame-ancestors 'self'")))
-			.formLogin(form -> form.disable()).httpBasic(basic -> basic.disable());
-		return http.build();
-	}
-	
-	@Bean
-	AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-		return authenticationConfiguration.getAuthenticationManager();
-	}
+  @Bean
+  SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    http
+        .csrf(csrf -> csrf.disable())
+        .sessionManagement(
+            session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+        .addFilterBefore(
+            new JwtAuthenticationFilter(this.tokenProvider, this.customUserDetailsService),
+            UsernamePasswordAuthenticationFilter.class)
+        .authorizeHttpRequests(auth -> auth.requestMatchers("/auth/**").permitAll()
+            .requestMatchers(HttpMethod.GET, "/store/**").permitAll().anyRequest().authenticated())
+        .headers(headers -> headers
+            .contentSecurityPolicy(csp -> csp.policyDirectives("frame-ancestors 'self'")))
+        .formLogin(form -> form.disable()).httpBasic(basic -> basic.disable());
+    return http.build();
+  }
+
+  @Bean
+  AuthenticationManager authenticationManager(
+      AuthenticationConfiguration authenticationConfiguration) throws Exception {
+    return authenticationConfiguration.getAuthenticationManager();
+  }
 
 }
