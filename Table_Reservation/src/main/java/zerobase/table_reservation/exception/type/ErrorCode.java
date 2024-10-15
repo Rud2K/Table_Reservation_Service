@@ -10,9 +10,6 @@ public enum ErrorCode {
   // JWT 발급 오류
   TOKEN_ISSUANCE_FAILD("TOKEN_ISSUANCE_FAILD", "JWT 생성 중 오류가 발생했습니다."),
 
-  // 잘못된 접근 오류
-  INVALID_ACCESS("INVALID_ACCESS", "잘못된 접근입니다."),
-
   // 잘못된 권한 접근 오류
   UNAUTHORIZED_ACCESS("UNAUTHORIZED_ACCESS", "이 리소스에 대한 접근 권한이 없습니다."),
 
@@ -24,6 +21,9 @@ public enum ErrorCode {
 
   // 잘못된 예약 상태 코드 오류
   INVALID_RESERVATION_STATUS("INVALID_RESERVATION_STATUS", "잘못된 예약 상태 코드입니다."),
+  
+  // 잘못된 별점 오류
+  INVALID_SCORE("INVALID_SCORE", "잘못된 별점입니다."),
 
   // 사용자 없음 오류
   USER_NOT_FOUND("USER_NOT_FOUND", "주어진 사용자 이름의 사용자를 찾을 수 없습니다."),
@@ -36,6 +36,9 @@ public enum ErrorCode {
 
   // 예약 정보 없음 오류
   RESERVATION_NOT_FOUND("RESERVATION_NOT_FOUND", "예약 정보를 찾을 수 없습니다."),
+  
+  // 리뷰 정보 없음 오류
+  REVIEW_NOT_FOUND("REVIEW_NOT_FOUND", "리뷰 정보를 찾을 수 없습니다."),
 
   // 잘못된 날짜 형식 오류
   INVALID_DATE_FORMAT("INVALID_DATE_FORMAT", "잘못된 날짜 형식입니다. 형식은 YYYYMMDD입니다.");
