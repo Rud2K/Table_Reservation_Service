@@ -62,7 +62,7 @@ public class UserEntity implements UserDetails {
    * 
    * @return GrantedAuthority의 컬렉션 (사용자의 역할을 기반으로 생성)
    * 
-   *         이 메소드는 사용자의 역할을 기반으로 단일 권한을 반환합니다.
+   * 이 메소드는 사용자의 역할을 기반으로 단일 권한을 반환합니다.
    */
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -74,7 +74,8 @@ public class UserEntity implements UserDetails {
    * 
    * @param store 추가할 StoreEntity 객체
    * 
-   *        사용자가 매장을 소유하도록 매장을 추가하고, 매장의 소유자 필드를 해당 사용자로 설정합니다.
+   * 사용자가 매장을 소유하도록 매장을 추가하고,
+   * 매장의 소유자 필드를 해당 사용자로 설정합니다.
    */
   public void addStore(StoreEntity store) {
     if (this.ownedStores == null) {
@@ -89,7 +90,8 @@ public class UserEntity implements UserDetails {
    * 
    * @param store 제거할 StoreEntity 객체
    * 
-   *        사용자의 소유 매장 목록에서 매장을 제거하고, 매장의 소유자 필드를 null로 설정하여 매장과의 연결을 해제합니다.
+   * 사용자의 소유 매장 목록에서 매장을 제거하고,
+   * 매장의 소유자 필드를 null로 설정하여 매장과의 연결을 해제합니다.
    */
   public void removeStore(StoreEntity store) {
     this.ownedStores.remove(store);
@@ -101,7 +103,8 @@ public class UserEntity implements UserDetails {
    * 
    * @param reservation 추가할 ReservationEntity 객체
    * 
-   *        사용자의 예약 목록에 예약을 추가하고, 해당 예약의 사용자 필드를 이 사용자로 설정합니다.
+   * 사용자의 예약 목록에 예약을 추가하고,
+   * 해당 예약의 사용자 필드를 이 사용자로 설정합니다.
    */
   public void addReservation(ReservationEntity reservation) {
     this.reservations.add(reservation);
@@ -113,7 +116,8 @@ public class UserEntity implements UserDetails {
    * 
    * @param reservation 제거할 ReservationEntity 객체
    * 
-   *        사용자의 예약 목록에서 해당 예약을 제거하고, 해당 예약의 사용자 필드를 null로 설정하여 연결을 해제합니다.
+   * 사용자의 예약 목록에서 해당 예약을 제거하고,
+   * 해당 예약의 사용자 필드를 null로 설정하여 연결을 해제합니다.
    */
   public void removeReservation(ReservationEntity reservation) {
     this.reservations.remove(reservation);
