@@ -12,11 +12,11 @@ import zerobase.table_reservation.model.constant.Rating;
 @Builder
 public class Review {
   
-  private Long reservationId;
-  private Long userId;
-  private Long storeId;
-  private String content;
-  private Rating rating;
+  private Long reservationId; // 예약 ID
+  private Long userId; // 사용자 ID
+  private Long storeId; // 매장 ID
+  private String content; // 리뷰 내용
+  private Rating rating; // 평점
   
   @Data
   @NoArgsConstructor
@@ -24,9 +24,9 @@ public class Review {
   @Builder
   public static class UpdateRequest {
     
-    private Long userId;
-    private String content;
-    private Rating rating;
+    private Long userId; // 사용자 ID
+    private String content; // 리뷰 내용
+    private Rating rating; // 평점
     
   }
   

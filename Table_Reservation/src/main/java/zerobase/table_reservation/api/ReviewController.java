@@ -25,6 +25,13 @@ public class ReviewController {
   
   private final ReviewService reviewService;
   
+  /**
+   * 새로운 리뷰를 생성하는 메소드
+   * POST /reviews
+   * 
+   * @param review 생성할 리뷰 정보
+   * @return 생성된 리뷰를 포함한 ResponseEntity
+   */
   @PostMapping
   @PreAuthorize("hasRole('USER')")
   public ResponseEntity<Review> createReview(@RequestBody Review review) {
@@ -32,6 +39,14 @@ public class ReviewController {
     return ResponseEntity.status(HttpStatus.CREATED).body(newReview);
   }
   
+  /**
+   * 기존 리뷰를 수정하는 메소드
+   * PUT /reviews/{reviewId}
+   * 
+   * @param reviewId 수정할 리뷰의 ID
+   * @param review 수정할 리뷰 정보
+   * @return 수정된 리뷰를 포함한 ResponseEntity
+   */
   @PutMapping("/{reviewId}")
   @PreAuthorize("hasRole('USER')")
   public ResponseEntity<Review> updateReview(
@@ -41,6 +56,13 @@ public class ReviewController {
     return ResponseEntity.ok(updatedReview);
   }
   
+  /**
+   * 특정 리뷰를 삭제하는 메소드
+   * DELETE /reviews/{reviewId}
+   * 
+   * @param reviewId 삭제할 리뷰의 ID
+   * @return ResponseEntity<Void>
+   */
   @DeleteMapping("/{reviewId}")
   @PreAuthorize("hasRole('PARTNER') or hasRole('USER')")
   public ResponseEntity<Void> deleteReview(@PathVariable("reviewId") Long reviewId) {
@@ -49,6 +71,12 @@ public class ReviewController {
     return ResponseEntity.noContent().build();
   }
   
+  /**
+   * 특정 매장에 대한 모든 리뷰를 조회하는 메소드
+   * 
+   * @param storeId 리뷰를 조회할 매장의 ID
+   * @return 해당 매장에 대한 리뷰 리스트를 포함한 ResponseEntity
+   */
   @GetMapping("/store/{storeId}")
   @PreAuthorize("hasRole('PARTNER') or hasRole('USER')")
   public ResponseEntity<List<Review>> getReviewsByStore(@PathVariable("storeId") Long storeId) {
