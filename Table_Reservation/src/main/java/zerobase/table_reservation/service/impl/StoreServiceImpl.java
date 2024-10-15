@@ -105,7 +105,7 @@ public class StoreServiceImpl implements StoreService {
         .build();
 
     this.storeRepository.save(storeEntity);
-
+    
     return Store.builder()
         .id(storeEntity.getId())
         .name(storeEntity.getName())

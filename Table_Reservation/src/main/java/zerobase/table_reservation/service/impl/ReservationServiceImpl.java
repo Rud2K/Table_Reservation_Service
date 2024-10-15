@@ -77,7 +77,7 @@ public class ReservationServiceImpl implements ReservationService {
   public Reservation.Response updateReservationStatus(Long reservationId, String status) {
     // 해당 메소드에서 예약 상태를 취소 상태로 업데이트할 수 없음
     if ("CANCELED".equalsIgnoreCase(status)) {
-      throw new TableReservationException(ErrorCode.INVALID_ACCESS);
+      throw new TableReservationException(ErrorCode.UNAUTHORIZED_ACCESS);
     }
 
     ReservationEntity reservationEntity = this.reservationRepository.findById(reservationId)
