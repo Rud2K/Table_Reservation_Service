@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Store {
 
-  private Long id; // 매장의 고유 ID
   private String name; // 매장 이름
   private String address; // 매장 주소
   private String number; // 매장 연락처

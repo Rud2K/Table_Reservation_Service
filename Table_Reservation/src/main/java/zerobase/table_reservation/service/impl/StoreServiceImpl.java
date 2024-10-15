@@ -44,7 +44,6 @@ public class StoreServiceImpl implements StoreService {
         .collect(Collectors.toList());
 
     return Store.builder()
-        .id(storeEntity.getId())
         .name(storeEntity.getName())
         .address(storeEntity.getAddress())
         .number(storeEntity.getNumber())
@@ -75,7 +74,6 @@ public class StoreServiceImpl implements StoreService {
       }
 
       Store store = Store.builder()
-          .id(storeEntity.getId())
           .name(storeEntity.getName())
           .address(storeEntity.getAddress())
           .number(storeEntity.getNumber())
@@ -96,7 +94,6 @@ public class StoreServiceImpl implements StoreService {
         .orElseThrow(() -> new TableReservationException(ErrorCode.USER_NOT_FOUND));
 
     StoreEntity storeEntity = StoreEntity.builder()
-        .id(store.getId())
         .name(store.getName())
         .address(store.getAddress())
         .number(store.getNumber())
@@ -107,7 +104,6 @@ public class StoreServiceImpl implements StoreService {
     this.storeRepository.save(storeEntity);
     
     return Store.builder()
-        .id(storeEntity.getId())
         .name(storeEntity.getName())
         .address(storeEntity.getAddress())
         .number(storeEntity.getNumber())
@@ -137,7 +133,6 @@ public class StoreServiceImpl implements StoreService {
     this.storeRepository.save(storeEntity);
 
     return Store.builder()
-        .id(storeEntity.getId())
         .name(storeEntity.getName())
         .address(storeEntity.getAddress())
         .number(storeEntity.getNumber())
